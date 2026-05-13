@@ -163,102 +163,107 @@
     </section>
 
     <!-- CONFIGURATOR -->
-    <section id="order" class="max-w-5xl mx-auto px-6 py-40">
-        <div class="text-center mb-20 reveal">
-            <h2 class="text-6xl font-black tracking-tighter">Configure yours<span class="text-blue-600">.</span></h2>
-        </div>
+<section id="order" class="max-w-5xl mx-auto px-6 py-40">
+    <div class="text-center mb-20 reveal">
+        <h2 class="text-6xl font-black tracking-tighter">Configure yours<span class="text-blue-600">.</span></h2>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 reveal">
-            <!-- Flower Section -->
-            <div class="nv-card p-8 space-y-6">
-                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Flower Variant</label>
-                <select id="f-type" onchange="calc(); toggleFlowerForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                    <option value="0">Not Selected</option>
-                    <option value="40">A1: 2 Rose + 3 Daisy (RM40)</option>
-                    <option value="24">A2: Rose x3 (RM24)</option>
-                    <option value="42">A3: Rose x5 (RM42)</option>
-                    <option value="39">A4: Daisy x5 (RM39)</option>
-                </select>
-                
-                <div id="flower-extra-ui" class="hidden space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 animate__animated animate__fadeIn">
-                    <div class="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-900 rounded-2xl">
-                        
-                        <input id="f-card" type="text" id="f-message" maxlength="30" placeholder="Message (30 characters max)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none text-blue-500 font-medium">
-                    </div>
-                    <input type="text" id="f-target-name" placeholder="Recipient Name" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
-                    <input type="text" id="f-target-class" placeholder="Recipient Class" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
-                    <input type="text" id="f-sender" placeholder="Your Name (leave blank for anonymous)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
-                </div>
-            </div>
-
-            <!-- Blind Box -->
-            <div class="nv-card p-8 space-y-6">
-                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
-                <select id="b-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                    <option value="0">Not Selected</option>
-                    <option value="12">C1: Box x1 (RM12)</option>
-                    <option value="20">C2: Box x2 (RM20)</option>
-                    <option value="35">C3: Box x3 + FREE WHISTLE (RM35)</option>
-                </select>
-            </div>
-
-            <!-- Pipeline Design -->
-            <div class="nv-card p-8 space-y-6">
-                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Pipeline Design</label>
-                <select id="s-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                    <option value="0">Not Selected</option>
-                    <option value="9">B1: Lily Design (RM9)</option>
-                    <option value="9">B2: Carnation Design (RM9)</option>
-                </select>
-            </div>
-
-            <!-- Keychain -->
-            <div class="nv-card p-8 space-y-6">
-                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Laser Keychain</label>
-                <select id="k-type" onchange="calc(); toggleKeychainForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                    <option value="0">Not Selected</option>
-                    <option value="6">D1: Premade (教师节) — RM6</option>
-                    <option value="6">D2: Premade (Happy Teacher's Day) — RM6</option>
-                    <option value="7">D3: Custom Design — RM7</option>
-                </select>
-                <div id="k-custom-ui" class="hidden pt-4 animate__animated animate__fadeIn">
-                    <p class="text-xs text-zinc-500 mb-2 font-bold uppercase">Upload Custom Artwork</p>
-                    <input type="file" id="k-image" class="text-xs text-zinc-400">
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 reveal">
+        <!-- Flower Section -->
+        <div class="nv-card p-8 space-y-6">
+            <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Flower Variant</label>
+            <select id="f-type" onchange="calc(); toggleFlowerForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                <option value="0">Not Selected</option>
+                <option value="40">A1: 2 Rose + 3 Daisy (RM40)</option>
+                <option value="24">A2: Rose x3 (RM24)</option>
+                <option value="42">A3: Rose x5 (RM42)</option>
+                <option value="39">A4: Daisy x5 (RM39)</option>
+            </select>
+            
+            <div id="flower-extra-ui" class="hidden space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 animate__animated animate__fadeIn">
+                <input type="text" id="f-message" maxlength="30" placeholder="Message (30 characters max)" class="w-full bg-zinc-50 dark:bg-zinc-900 rounded-xl p-3 outline-none text-blue-500 font-medium border border-black/5">
+                <input type="text" id="f-target-name" placeholder="Recipient Name" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
+                <input type="text" id="f-target-class" placeholder="Recipient Class" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
+                <input type="text" id="f-sender" placeholder="Your Name (leave blank for anonymous)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
             </div>
         </div>
 
-        <!-- Identity & Checkout -->
-        <div class="nv-card p-12 md:p-20 text-center reveal">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <input type="text" id="u-name" placeholder="Your Name" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
-                <input type="text" id="u-id" placeholder="Student ID" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
-                <input type="text" id="u-class" placeholder="Class" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
-            </div>
-
-            <div class="mb-16">
-                <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.4em] mb-4">Final Configuration Amount</p>
-                <div class="text-8xl font-black tracking-tighter">RM <span id="total">0.00</span></div>
-            </div>
-
-            <div class="flex justify-center bg-zinc-100 dark:bg-zinc-900 p-2 rounded-full w-fit mx-auto mb-12 border border-black/5 dark:border-white/5">
-                <button id="pay-tng" onclick="setPayment('TNG')" class="px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20">TNG eWallet</button>
-                <button id="pay-cash" onclick="setPayment('Cash')" class="px-10 py-3 rounded-full font-bold transition-all text-zinc-500">Cash</button>
-            </div>
-
-            <div id="tng-ui" class="animate__animated animate__fadeIn">
-                <div class="bg-white p-8 inline-block rounded-[3rem] mb-10 shadow-2xl border-8 border-zinc-100">
-                    <img src="PaymentQR.jpeg" class="w-72 h-72 md:w-96 md:h-96 object-contain" alt="Payment QR">
-                </div>
-                <p class="text-zinc-500 text-sm mb-6 uppercase tracking-widest font-bold">Upload Transaction Receipt</p>
-                <input type="file" id="u-receipt" class="mx-auto block text-xs">
-            </div>
-
-            <button onclick="submitOrder()" id="sub-btn" class="mt-20 w-full py-8 bg-black dark:bg-white text-white dark:text-black font-black rounded-full text-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-2xl">
-                Place Pre-Order
-            </button>
+        <!-- Blind Box -->
+        <div class="nv-card p-8 space-y-6">
+            <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
+            <select id="b-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                <option value="0">Not Selected</option>
+                <option value="12">C1: Box x1 (RM12)</option>
+                <option value="20">C2: Box x2 (RM20)</option>
+                <option value="35">C3: Box x3 + FREE WHISTLE (RM35)</option>
+            </select>
         </div>
-    </section>
+
+        <!-- Pipeline Design -->
+        <div class="nv-card p-8 space-y-6">
+            <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Pipeline Design</label>
+            <select id="s-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                <option value="0">Not Selected</option>
+                <option value="9">B1: Lily Design (RM9)</option>
+                <option value="9">B2: Carnation Design (RM9)</option>
+            </select>
+        </div>
+
+        <!-- Keychain Section with Qty -->
+        <div class="nv-card p-8 space-y-6">
+            <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Laser Keychain</label>
+            <div class="flex gap-4 items-end">
+                <div class="flex-grow">
+                    <select id="k-type" onchange="calc(); toggleKeychainForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                        <option value="0">Not Selected</option>
+                        <option value="6">D1: Premade (教师节) — RM6</option>
+                        <option value="6">D2: Premade (Teacher's Day) — RM6</option>
+                        <option value="7">D3: Custom Design — RM7</option>
+                    </select>
+                </div>
+                <div class="w-20">
+                    <label class="text-[8px] font-bold text-zinc-400 uppercase mb-1 block">Qty</label>
+                    <input type="number" id="k-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
+                </div>
+            </div>
+            <div id="k-custom-ui" class="hidden pt-4 animate__animated animate__fadeIn">
+                <p class="text-xs text-zinc-500 mb-2 font-bold uppercase">Upload Custom Artwork</p>
+                <input type="file" id="k-image" class="text-xs text-zinc-400">
+            </div>
+        </div>
+    </div>
+
+    <!-- Identity & Checkout remains mostly the same as your original -->
+    <div class="nv-card p-12 md:p-20 text-center reveal">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <input type="text" id="u-name" placeholder="Your Name" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
+            <input type="text" id="u-id" placeholder="Student ID" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
+            <input type="text" id="u-class" placeholder="Class" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-16">
+            <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.4em] mb-4">Final Configuration Amount</p>
+            <div class="text-8xl font-black tracking-tighter">RM <span id="total">0.00</span></div>
+        </div>
+
+        <div class="flex justify-center bg-zinc-100 dark:bg-zinc-900 p-2 rounded-full w-fit mx-auto mb-12 border border-black/5 dark:border-white/5">
+            <button id="pay-tng" onclick="setPayment('TNG')" class="px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20">TNG eWallet</button>
+            <button id="pay-cash" onclick="setPayment('Cash')" class="px-10 py-3 rounded-full font-bold transition-all text-zinc-500">Cash</button>
+        </div>
+
+        <div id="tng-ui" class="animate__animated animate__fadeIn">
+            <div class="bg-white p-8 inline-block rounded-[3rem] mb-10 shadow-2xl border-8 border-zinc-100">
+                <img src="PaymentQR.jpeg" class="w-72 h-72 md:w-96 md:h-96 object-contain" alt="Payment QR">
+            </div>
+            <p class="text-zinc-500 text-sm mb-6 uppercase tracking-widest font-bold">Upload Transaction Receipt</p>
+            <input type="file" id="u-receipt" class="mx-auto block text-xs">
+        </div>
+
+        <button onclick="submitOrder()" id="sub-btn" class="mt-20 w-full py-8 bg-black dark:bg-white text-white dark:text-black font-black rounded-full text-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-2xl">
+            Place Pre-Order
+        </button>
+    </div>
+</section>
 
     <footer class="py-20 text-center text-[10px] font-bold uppercase tracking-[0.5em] opacity-30">
         Relight Enterprise © 2026 // Air Itam, Penang
@@ -293,14 +298,18 @@
         }
 
         function calc() {
-            const f = parseFloat(document.getElementById('f-type').value) || 0;
-            const card = document.getElementById('f-card').checked ? 1 : 0;
-            const b = parseFloat(document.getElementById('b-type').value) || 0;
-            const s = parseFloat(document.getElementById('s-type').value) || 0;
-            const k = parseFloat(document.getElementById('k-type').value) || 0;
-            
-            document.getElementById('total').innerText = (f + card + b + s + k).toFixed(2);
-        }
+    const f = parseFloat(document.getElementById('f-type').value) || 0;
+    const b = parseFloat(document.getElementById('b-type').value) || 0;
+    const s = parseFloat(document.getElementById('s-type').value) || 0;
+    
+    // Keychain Math: Price * Qty
+    const kBase = parseFloat(document.getElementById('k-type').value) || 0;
+    const kQty = parseInt(document.getElementById('k-qty').value) || 1;
+    const kTotal = kBase * kQty;
+    
+    // Total calculation (Message is free)
+    document.getElementById('total').innerText = (f + b + s + kTotal).toFixed(2);
+}
 
         function setPayment(m) {
             selectedPay = m;
@@ -309,54 +318,81 @@
             document.getElementById('tng-ui').classList.toggle('hidden', m==='Cash');
         }
 
-        async function submitOrder() {
+        // Helper function to convert files to Base64
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve({
+        base64: reader.result.split(',')[1],
+        type: file.type,
+        name: file.name
+    });
+    reader.onerror = error => reject(error);
+});
+
+async function submitOrder() {
     const btn = document.getElementById('sub-btn');
     const uName = document.getElementById('u-name').value;
     const uId = document.getElementById('u-id').value;
     const uClass = document.getElementById('u-class').value;
-    const uReceipt = document.getElementById('u-receipt').files.length; // Checks if a file is selected
     
     if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
-    
-    // Check if an order was actually selected
-    if(document.getElementById('total').innerText === "0.00") {
-        return alert("Please select at least one item to order.");
-    }
+    if(document.getElementById('total').innerText === "0.00") return alert("Please select an item.");
 
-    btn.innerText = "Encrypting & Sending...";
+    btn.innerText = "Uploading Files & Processing...";
     btn.disabled = true;
 
-    const finalData = {
-        name: uName,
-        id: uId,
-        userClass: uClass,
-        total: "RM " + document.getElementById('total').innerText,
-        payment: selectedPay,
-        receiptStatus: (selectedPay === 'TNG' && uReceipt > 0) ? "Uploaded" : (selectedPay === 'Cash' ? "N/A" : "MISSING"),
-        flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
-        flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
-        blindBox: document.getElementById('b-type').selectedOptions[0].text,
-        pipeline: document.getElementById('s-type').selectedOptions[0].text,
-        keychain: document.getElementById('k-type').selectedOptions[0].text
-    };
-    
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxybTEEyLLiosmeZajX5PHARbuJMM71WLpt6WlvPzvgjbtyiI0jFoa96LdZa37CIcS1hw/exec';
-
     try {
-        // This sends the data to your Google Sheet via the Apps Script
+        // --- HANDLE FILE CONVERSION ---
+        let receiptFileData = null;
+        let customArtFileData = null;
+
+        const receiptInput = document.getElementById('u-receipt');
+        const artInput = document.getElementById('k-image');
+
+        if (receiptInput.files.length > 0) {
+            receiptFileData = await toBase64(receiptInput.files[0]);
+        }
+        
+        if (artInput.files.length > 0) {
+            customArtFileData = await toBase64(artInput.files[0]);
+        }
+
+        // --- PREPARE DATA PACKAGE ---
+        const finalData = {
+            name: uName,
+            id: uId,
+            userClass: uClass,
+            total: "RM " + document.getElementById('total').innerText,
+            payment: selectedPay,
+            flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
+            // Using flowerRecipient to match your current Apps Script
+            flowerRecipient: `To: ${document.getElementById('f-target-name').value} | Msg: ${document.getElementById('f-message').value} | From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
+            blindBox: document.getElementById('b-type').selectedOptions[0].text,
+            pipeline: document.getElementById('s-type').selectedOptions[0].text,
+            keychain: `${document.getElementById('k-type').selectedOptions[0].text} (Qty: ${document.getElementById('k-qty').value})`,
+            // These names must match your Apps Script "data.receiptFile" and "data.customArtFile"
+            receiptFile: receiptFileData,
+            customArtFile: customArtFileData
+        };
+        
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxybTEEyLLiosmeZajX5PHARbuJMM71WLpt6WlvPzvgjbtyiI0jFoa96LdZa37CIcS1hw/exec';
+
+        // Use 'cors' instead of 'no-cors' if you want to see the "Success" response properly
         await fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors', // Essential for Google Apps Script redirects
+            mode: 'no-cors', 
             cache: 'no-cache',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(finalData)
         });
 
-        alert("Order submitted successfully!");
-        // Optional: Reset form or redirect to a thank you page
+        alert("Order submitted successfully! Your files have been uploaded.");
+        window.location.reload(); // Refresh to clear form
+
     } catch (error) {
-        console.error('Error!', error.message);
-        alert("There was an error submitting your order. Please try again.");
+        console.error(error);
+        alert("Error: " + error.message);
     } finally {
         btn.innerText = "Place Pre-Order";
         btn.disabled = false;
