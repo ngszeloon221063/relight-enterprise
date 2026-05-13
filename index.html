@@ -182,8 +182,8 @@
                 
                 <div id="flower-extra-ui" class="hidden space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 animate__animated animate__fadeIn">
                     <div class="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-900 rounded-2xl">
-                        <span class="text-sm font-bold">Message Card (+RM 1)</span>
-                        <input type="checkbox" id="f-card" onchange="calc()" class="w-5 h-5">
+                        
+                        <input id="f-card" type="text" id="f-message" maxlength="30" placeholder="Message (30 characters max)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none text-blue-500 font-medium">
                     </div>
                     <input type="text" id="f-target-name" placeholder="Recipient Name" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
                     <input type="text" id="f-target-class" placeholder="Recipient Class" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
@@ -340,7 +340,7 @@
         keychain: document.getElementById('k-type').selectedOptions[0].text
     };
     
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby2zRfHvR9jmmqXu2uThu7zD5a-sA1Lt6UdLdXJQNlkE5Y09805EMO942wRMyCJCgBsxQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxybTEEyLLiosmeZajX5PHARbuJMM71WLpt6WlvPzvgjbtyiI0jFoa96LdZa37CIcS1hw/exec';
 
     try {
         // This sends the data to your Google Sheet via the Apps Script
