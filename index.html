@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relight Enterprise | Premium Artisan Collective</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
+        .nv-card { @apply bg-white dark:bg-[#0d0d0d] border border-black/10 dark:border-white/10 rounded-[2.5rem] transition-all duration-500; }
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+        .bento-item { @apply rounded-[3rem] overflow-hidden relative border border-black/5 dark:border-white/5 bg-zinc-100 dark:bg-[#111]; }
+        
+        select option { @apply bg-white dark:bg-[#1a1a1a] text-black dark:text-white; }
+        
+        .sc-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); }
+        .light .sc-overlay { background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.2) 50%, transparent 100%); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .gradient-text { background: linear-gradient(to right, #000, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .dark .gradient-text { background: linear-gradient(to right, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="antialiased bg-zinc-50 text-black dark:bg-black dark:text-white">
+
+    <!-- Nav -->
+    <nav class="fixed w-full z-[200] px-8 py-6 flex justify-between items-center backdrop-blur-xl border-b border-black/5 dark:border-white/5">
+        <div class="text-xl font-black tracking-tighter">RELIGHT<span class="text-blue-600">.</span></div>
+        <div class="flex items-center space-x-6">
+            <button onclick="toggleTheme()" class="w-12 h-12 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/5">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="h-[90vh] flex flex-col justify-center items-center px-6 text-center">
+        <h1 class="text-7xl md:text-[10rem] font-black tracking-tighter leading-none mb-6 animate__animated animate__fadeIn">
+            RELIGHT<br><span class="gradient-text">ENTERPRISE</span>
+        </h1>
+        <p class="text-zinc-500 max-w-xl text-lg md:text-xl animate__animated animate__fadeIn animate__delay-1s">
+            The 2026 Boutique Series. Engineering the art of gifting.
+        </p>
+    </section>
+
+    <!-- PRODUCT SHOWCASE -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="mb-10 reveal">
+            <h2 class="text-4xl font-bold tracking-tight">Artisan Flowers. <span class="text-zinc-500">Hand-crafted excellence.</span></h2>
+        </div>
+        
+        <!-- Flower Scroll -->
+        <div class="flex overflow-x-auto pb-10 space-x-6 scrollbar-hide snap-x">
+            <div class="snap-center shrink-0 w-[320px] md:w-[400px] h-[500px] nv-card overflow-hidden group relative">
+                <img src="Flower2.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-10 flex flex-col justify-end">
+                    <p class="text-blue-400 text-xs font-bold uppercase mb-2">New Selection</p>
+                    <h3 class="text-white text-2xl font-bold">White Lily Ensemble</h3>
+                    <p class="text-zinc-400 text-sm mt-2">Elegant hand-crafted fiber petals.</p>
+                </div>
+            </div>
+            <div class="snap-center shrink-0 w-[320px] md:w-[400px] h-[500px] nv-card overflow-hidden group relative">
+                <img src="Flower3.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-10 flex flex-col justify-end">
+                    <p class="text-blue-400 text-xs font-bold uppercase mb-2">Boutique Selection</p>
+                    <h3 class="text-white text-2xl font-bold">Blue Tulip Design</h3>
+                    <p class="text-zinc-400 text-sm mt-2">Soft-touch aesthetic for your desk.</p>
+                </div>
+            </div>
+            <div class="snap-center shrink-0 w-[320px] md:w-[400px] h-[500px] nv-card overflow-hidden group relative">
+                <img src="Flower.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-10 flex flex-col justify-end">
+                    <p class="text-blue-400 text-xs font-bold uppercase mb-2">Best Seller</p>
+                    <h3 class="text-white text-2xl font-bold">flower</h3>
+                    <p class="text-zinc-400 text-sm mt-2">Timeless design, everlasting beauty.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW 3-BOX LAYOUT: Laser Cut & Pipelines -->
+        <div class="mb-10 mt-20 reveal">
+            <h2 class="text-4xl font-bold tracking-tight">Precision Engineering. <span class="text-zinc-500">Laser & Pipeline.</span></h2>
+        </div>
+        <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left: Laser Cut -->
+            <div class="nv-card overflow-hidden h-[500px] flex flex-col group">
+                <div class="h-2/3 overflow-hidden">
+                    <img src="Keychain.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="p-8 flex flex-col justify-center flex-grow text-center">
+                    <h3 class="text-xl font-black uppercase">Laser Cut Designs</h3>
+                    <p class="text-zinc-500 text-xs mt-2 uppercase tracking-widest font-bold">Industrial Precision</p>
+                </div>
+            </div>
+            <!-- Middle: Pipeline 1 -->
+            <div class="nv-card overflow-hidden h-[500px] flex flex-col group">
+                <div class="h-2/3 overflow-hidden">
+                    <img src="Bluetulip.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="p-8 flex flex-col justify-center flex-grow text-center">
+                    <h3 class="text-xl font-black uppercase">Pipeline: Blue Tulip</h3>
+                    <p class="text-zinc-500 text-xs mt-2 uppercase tracking-widest font-bold">Hand-Woven Fiber</p>
+                </div>
+            </div>
+            <!-- Right: Pipeline 2 -->
+            <div class="nv-card overflow-hidden h-[500px] flex flex-col group">
+                <div class="h-2/3 overflow-hidden">
+                    <img src="Whitelily.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="p-8 flex flex-col justify-center flex-grow text-center">
+                    <h3 class="text-xl font-black uppercase">Pipeline: White Lily</h3>
+                    <p class="text-zinc-500 text-xs mt-2 uppercase tracking-widest font-bold">Artisan Structure</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Apple-Style Blind Box Section -->
+        <div class="reveal mt-32 nv-card bg-white dark:bg-[#0d0d0d] p-12 md:p-24 text-center overflow-hidden relative">
+            <div class="relative z-10">
+                <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-4">Kitkard Blind Box.</h2>
+                <p class="text-zinc-500 text-xl max-w-2xl mx-auto mb-12">Engineered surprise. Choose your rarity and unlock exclusive rewards.</p>
+                <div class="flex justify-center mb-16">
+                    <span class="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-black tracking-widest uppercase">Limited 2026 Series</span>
+                </div>
+            </div>
+            <div class="flex justify-center items-center">
+                <img src="Blindbox.jpeg" class="w-full max-w-4xl rounded-[2rem] shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
+            </div>
+        </div>
+    </section>
+
+    <!-- CONFIGURATOR -->
+    <section id="order" class="max-w-5xl mx-auto px-6 py-40">
+        <div class="text-center mb-20 reveal">
+            <h2 class="text-6xl font-black tracking-tighter">Configure yours<span class="text-blue-600">.</span></h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 reveal">
+            <!-- Flower Section -->
+            <div class="nv-card p-8 space-y-6">
+                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Flower Variant</label>
+                <select id="f-type" onchange="calc(); toggleFlowerForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                    <option value="0">Not Selected</option>
+                    <option value="40">A1: 2 Rose + 3 Daisy (RM40)</option>
+                    <option value="24">A2: Rose x3 (RM24)</option>
+                    <option value="42">A3: Rose x5 (RM42)</option>
+                    <option value="39">A4: Daisy x5 (RM39)</option>
+                </select>
+                
+                <div id="flower-extra-ui" class="hidden space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 animate__animated animate__fadeIn">
+                    <div class="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-900 rounded-2xl">
+                        <span class="text-sm font-bold">Message Card (+RM 1)</span>
+                        <input type="checkbox" id="f-card" onchange="calc()" class="w-5 h-5">
+                    </div>
+                    <input type="text" id="f-target-name" placeholder="Recipient Name" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
+                    <input type="text" id="f-target-class" placeholder="Recipient Class" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
+                    <input type="text" id="f-sender" placeholder="Your Name (leave blank for anonymous)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
+                </div>
+            </div>
+
+            <!-- Blind Box -->
+            <div class="nv-card p-8 space-y-6">
+                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
+                <select id="b-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                    <option value="0">Not Selected</option>
+                    <option value="12">C1: Box x1 (RM12)</option>
+                    <option value="20">C2: Box x2 (RM20)</option>
+                    <option value="35">C3: Box x3 + FREE WHISTLE (RM35)</option>
+                </select>
+            </div>
+
+            <!-- Pipeline Design -->
+            <div class="nv-card p-8 space-y-6">
+                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Pipeline Design</label>
+                <select id="s-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                    <option value="0">Not Selected</option>
+                    <option value="9">B1: Lily Design (RM9)</option>
+                    <option value="9">B2: Carnation Design (RM9)</option>
+                </select>
+            </div>
+
+            <!-- Keychain -->
+            <div class="nv-card p-8 space-y-6">
+                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Laser Keychain</label>
+                <select id="k-type" onchange="calc(); toggleKeychainForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                    <option value="0">Not Selected</option>
+                    <option value="6">D1: Premade (教师节) — RM6</option>
+                    <option value="6">D2: Premade (Happy Teacher's Day) — RM6</option>
+                    <option value="7">D3: Custom Design — RM7</option>
+                </select>
+                <div id="k-custom-ui" class="hidden pt-4 animate__animated animate__fadeIn">
+                    <p class="text-xs text-zinc-500 mb-2 font-bold uppercase">Upload Custom Artwork</p>
+                    <input type="file" id="k-image" class="text-xs text-zinc-400">
+                </div>
+            </div>
+        </div>
+
+        <!-- Identity & Checkout -->
+        <div class="nv-card p-12 md:p-20 text-center reveal">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <input type="text" id="u-name" placeholder="Your Name" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
+                <input type="text" id="u-id" placeholder="Student ID" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
+                <input type="text" id="u-class" placeholder="Class" class="bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-4 text-center outline-none focus:border-blue-500">
+            </div>
+
+            <div class="mb-16">
+                <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.4em] mb-4">Final Configuration Amount</p>
+                <div class="text-8xl font-black tracking-tighter">RM <span id="total">0.00</span></div>
+            </div>
+
+            <div class="flex justify-center bg-zinc-100 dark:bg-zinc-900 p-2 rounded-full w-fit mx-auto mb-12 border border-black/5 dark:border-white/5">
+                <button id="pay-tng" onclick="setPayment('TNG')" class="px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20">TNG eWallet</button>
+                <button id="pay-cash" onclick="setPayment('Cash')" class="px-10 py-3 rounded-full font-bold transition-all text-zinc-500">Cash</button>
+            </div>
+
+            <div id="tng-ui" class="animate__animated animate__fadeIn">
+                <div class="bg-white p-8 inline-block rounded-[3rem] mb-10 shadow-2xl border-8 border-zinc-100">
+                    <img src="PaymentQR.jpeg" class="w-72 h-72 md:w-96 md:h-96 object-contain" alt="Payment QR">
+                </div>
+                <p class="text-zinc-500 text-sm mb-6 uppercase tracking-widest font-bold">Upload Transaction Receipt</p>
+                <input type="file" id="u-receipt" class="mx-auto block text-xs">
+            </div>
+
+            <button onclick="submitOrder()" id="sub-btn" class="mt-20 w-full py-8 bg-black dark:bg-white text-white dark:text-black font-black rounded-full text-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-2xl">
+                Place Pre-Order
+            </button>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center text-[10px] font-bold uppercase tracking-[0.5em] opacity-30">
+        Relight Enterprise © 2026 // Air Itam, Penang
+    </footer>
+
+    <script>
+        let selectedPay = 'TNG';
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark'); html.classList.add('light'); icon.innerText = '☀️';
+            } else {
+                html.classList.remove('light'); html.classList.add('dark'); icon.innerText = '🌙';
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function toggleFlowerForm() {
+            const extra = document.getElementById('flower-extra-ui');
+            extra.classList.toggle('hidden', document.getElementById('f-type').value == '0');
+        }
+
+        function toggleKeychainForm() {
+            const custom = document.getElementById('k-custom-ui');
+            custom.classList.toggle('hidden', document.getElementById('k-type').value != '7');
+        }
+
+        function calc() {
+            const f = parseFloat(document.getElementById('f-type').value) || 0;
+            const card = document.getElementById('f-card').checked ? 1 : 0;
+            const b = parseFloat(document.getElementById('b-type').value) || 0;
+            const s = parseFloat(document.getElementById('s-type').value) || 0;
+            const k = parseFloat(document.getElementById('k-type').value) || 0;
+            
+            document.getElementById('total').innerText = (f + card + b + s + k).toFixed(2);
+        }
+
+        function setPayment(m) {
+            selectedPay = m;
+            document.getElementById('pay-tng').className = `px-10 py-3 rounded-full font-bold transition-all ${m==='TNG'?'bg-blue-600 text-white shadow-xl shadow-blue-500/20':'text-zinc-500'}`;
+            document.getElementById('pay-cash').className = `px-10 py-3 rounded-full font-bold transition-all ${m==='Cash'?'bg-blue-600 text-white shadow-xl shadow-blue-500/20':'text-zinc-500'}`;
+            document.getElementById('tng-ui').classList.toggle('hidden', m==='Cash');
+        }
+
+        async function submitOrder() {
+    const btn = document.getElementById('sub-btn');
+    const uName = document.getElementById('u-name').value;
+    const uId = document.getElementById('u-id').value;
+    const uClass = document.getElementById('u-class').value;
+    
+    if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
+    
+    // Check if an order was actually selected
+    if(document.getElementById('total').innerText === "0.00") {
+        return alert("Please select at least one item to order.");
+    }
+
+    btn.innerText = "Encrypting & Sending...";
+    btn.disabled = true;
+
+    const finalData = {
+        name: uName,
+        id: uId,
+        userClass: uClass,
+        total: "RM " + document.getElementById('total').innerText,
+        payment: selectedPay,
+        flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
+        flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
+        blindBox: document.getElementById('b-type').selectedOptions[0].text,
+        pipeline: document.getElementById('s-type').selectedOptions[0].text,
+        keychain: document.getElementById('k-type').selectedOptions[0].text
+    };
+    
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby2zRfHvR9jmmqXu2uThu7zD5a-sA1Lt6UdLdXJQNlkE5Y09805EMO942wRMyCJCgBsxQ/exec';
+
+    try {
+        // This sends the data to your Google Sheet via the Apps Script
+        await fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors', // Essential for Google Apps Script redirects
+            cache: 'no-cache',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(finalData)
+        });
+
+        alert("Order submitted successfully!");
+        // Optional: Reset form or redirect to a thank you page
+    } catch (error) {
+        console.error('Error!', error.message);
+        alert("There was an error submitting your order. Please try again.");
+    } finally {
+        btn.innerText = "Place Pre-Order";
+        btn.disabled = false;
+    }
+}
+    </script>
+</body>
+</html>
