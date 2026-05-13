@@ -11,23 +11,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
-        .nv-card { @apply bg-white dark:bg-[#0d0d0d] border border-black/10 dark:border-white/10 rounded-[2.5rem] transition-all duration-500; }
-        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
-        .bento-item { @apply rounded-[3rem] overflow-hidden relative border border-black/5 dark:border-white/5 bg-zinc-100 dark:bg-[#111]; }
-        
-        select option { @apply bg-white dark:bg-[#1a1a1a] text-black dark:text-white; }
-        
-        .sc-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); }
-        .light .sc-overlay { background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.2) 50%, transparent 100%); }
+    body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
+    .nv-card { @apply bg-white dark:bg-[#0d0d0d] border border-black/10 dark:border-white/10 rounded-[2rem] md:rounded-[2.5rem] transition-all duration-500; }
+    .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+    .bento-item { @apply rounded-[3rem] overflow-hidden relative border border-black/5 dark:border-white/5 bg-zinc-100 dark:bg-[#111]; }
+    
+    /* FIX FOR DARK MODE OPTIONS */
+    select { 
+        appearance: none; 
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+    }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        .gradient-text { background: linear-gradient(to right, #000, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .dark .gradient-text { background: linear-gradient(to right, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-    </style>
+    /* This targets the dropdown background specifically */
+    select option { 
+        background-color: white !important; 
+        color: black !important; 
+    }
+    
+    .dark select option { 
+        background-color: #1a1a1a !important; 
+        color: white !important; 
+    }
+
+    .sc-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); }
+    .light .sc-overlay { background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.2) 50%, transparent 100%); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    
+    .gradient-text { background: linear-gradient(to right, #000, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .dark .gradient-text { background: linear-gradient(to right, #fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+    /* MOBILE OPTIMIZATION */
+    @media (max-width: 768px) {
+        h1 { font-size: 4rem !important; }
+        .nv-card { padding: 1.5rem !important; }
+        .text-8xl { font-size: 4rem !important; }
+    }
+</style>
 </head>
 <body class="antialiased bg-zinc-50 text-black dark:bg-black dark:text-white">
 
@@ -183,7 +208,7 @@
                 <select id="s-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
                     <option value="0">Not Selected</option>
                     <option value="9">B1: Lily Design (RM9)</option>
-                    <option value="9">B2: Blue Tulip Design (RM9)</option>
+                    <option value="9">B2: Carnation Design (RM9)</option>
                 </select>
             </div>
 
@@ -284,76 +309,57 @@
             document.getElementById('tng-ui').classList.toggle('hidden', m==='Cash');
         }
 
-        // Helper function to convert files to Base64
-const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve({
-        base64: reader.result.split(',')[1],
-        type: file.type,
-        name: file.name
-    });
-    reader.onerror = error => reject(error);
-});
-
-async function submitOrder() {
+        async function submitOrder() {
     const btn = document.getElementById('sub-btn');
     const uName = document.getElementById('u-name').value;
     const uId = document.getElementById('u-id').value;
     const uClass = document.getElementById('u-class').value;
+    const uReceipt = document.getElementById('u-receipt').files.length; // Checks if a file is selected
     
     if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
+    
+    // Check if an order was actually selected
+    if(document.getElementById('total').innerText === "0.00") {
+        return alert("Please select at least one item to order.");
+    }
 
-    btn.innerText = "Processing Files...";
+    btn.innerText = "Encrypting & Sending...";
     btn.disabled = true;
 
+    const finalData = {
+        name: uName,
+        id: uId,
+        userClass: uClass,
+        total: "RM " + document.getElementById('total').innerText,
+        payment: selectedPay,
+        receiptStatus: (selectedPay === 'TNG' && uReceipt > 0) ? "Uploaded" : (selectedPay === 'Cash' ? "N/A" : "MISSING"),
+        flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
+        flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
+        blindBox: document.getElementById('b-type').selectedOptions[0].text,
+        pipeline: document.getElementById('s-type').selectedOptions[0].text,
+        keychain: document.getElementById('k-type').selectedOptions[0].text
+    };
+    
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby2zRfHvR9jmmqXu2uThu7zD5a-sA1Lt6UdLdXJQNlkE5Y09805EMO942wRMyCJCgBsxQ/exec';
+
     try {
-        let receiptFile = null;
-        let customArtFile = null;
-
-        // Read the Receipt file if it exists
-        const receiptInput = document.getElementById('u-receipt');
-        if (receiptInput.files.length > 0) {
-            receiptFile = await toBase64(receiptInput.files[0]);
-        }
-
-        // Read the Custom Art file if it exists
-        const artInput = document.getElementById('k-image');
-        if (artInput.files.length > 0) {
-            customArtFile = await toBase64(artInput.files[0]);
-        }
-
-        const finalData = {
-            name: uName,
-            id: uId,
-            userClass: uClass,
-            total: "RM " + document.getElementById('total').innerText,
-            payment: selectedPay,
-            flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
-            flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
-            blindBox: document.getElementById('b-type').selectedOptions[0].text,
-            pipeline: document.getElementById('s-type').selectedOptions[0].text,
-            keychain: document.getElementById('k-type').selectedOptions[0].text,
-            receiptFile: receiptFile,  // This now contains the actual image data
-            customArtFile: customArtFile
-        };
-
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxybTEEyLLiosmeZajX5PHARbuJMM71WLpt6WlvPzvgjbtyiI0jFoa96LdZa37CIcS1hw/exec';
-
+        // This sends the data to your Google Sheet via the Apps Script
         await fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors',
+            mode: 'no-cors', // Essential for Google Apps Script redirects
             cache: 'no-cache',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(finalData)
         });
 
         alert("Order submitted successfully!");
+        // Optional: Reset form or redirect to a thank you page
     } catch (error) {
-        console.error(error);
-        alert("Error: " + error.message);
+        console.error('Error!', error.message);
+        alert("There was an error submitting your order. Please try again.");
     } finally {
-      btn.innerText = "Place Pre-Order";
-      btn.disabled = false;
+        btn.innerText = "Place Pre-Order";
+        btn.disabled = false;
     }
 }
     </script>
