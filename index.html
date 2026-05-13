@@ -285,10 +285,11 @@
         }
 
         async function submitOrder() {
-    const btn = document.getElementById('sub-btn');
-    const uName = document.getElementById('u-name').value;
-    const uId = document.getElementById('u-id').value;
-    const uClass = document.getElementById('u-class').value;
+            const btn = document.getElementById('sub-btn');
+            const uName = document.getElementById('u-name').value;
+            const uId = document.getElementById('u-id').value;
+            const uClass = document.getElementById('u-class').value;
+            const uReceipt = document.getElementById('u-receipt').files.length; // Checks if a file is selected
     
     if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
     
@@ -306,6 +307,7 @@
         userClass: uClass,
         total: "RM " + document.getElementById('total').innerText,
         payment: selectedPay,
+        receiptStatus: (selectedPay === 'TNG' && uReceipt > 0) ? "Uploaded" : (selectedPay === 'Cash' ? "N/A" : "MISSING"),
         flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
         flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
         blindBox: document.getElementById('b-type').selectedOptions[0].text,
