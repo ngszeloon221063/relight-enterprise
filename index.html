@@ -284,57 +284,76 @@
             document.getElementById('tng-ui').classList.toggle('hidden', m==='Cash');
         }
 
-        async function submitOrder() {
-            const btn = document.getElementById('sub-btn');
-            const uName = document.getElementById('u-name').value;
-            const uId = document.getElementById('u-id').value;
-            const uClass = document.getElementById('u-class').value;
-            const uReceipt = document.getElementById('u-receipt').files.length; // Checks if a file is selected
+        // Helper function to convert files to Base64
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve({
+        base64: reader.result.split(',')[1],
+        type: file.type,
+        name: file.name
+    });
+    reader.onerror = error => reject(error);
+});
+
+async function submitOrder() {
+    const btn = document.getElementById('sub-btn');
+    const uName = document.getElementById('u-name').value;
+    const uId = document.getElementById('u-id').value;
+    const uClass = document.getElementById('u-class').value;
     
     if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
-    
-    // Check if an order was actually selected
-    if(document.getElementById('total').innerText === "0.00") {
-        return alert("Please select at least one item to order.");
-    }
 
-    btn.innerText = "Encrypting & Sending...";
+    btn.innerText = "Processing Files...";
     btn.disabled = true;
 
-    const finalData = {
-        name: uName,
-        id: uId,
-        userClass: uClass,
-        total: "RM " + document.getElementById('total').innerText,
-        payment: selectedPay,
-        receiptStatus: (selectedPay === 'TNG' && uReceipt > 0) ? "Uploaded" : (selectedPay === 'Cash' ? "N/A" : "MISSING"),
-        flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
-        flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
-        blindBox: document.getElementById('b-type').selectedOptions[0].text,
-        pipeline: document.getElementById('s-type').selectedOptions[0].text,
-        keychain: document.getElementById('k-type').selectedOptions[0].text
-    };
-    
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxvgC7344hPz_KP_SuR6yH2a4wTOx-Exg0BKKqIL-B_pgNP2uZUILX3inuXf8Zi0m0W/exec';
-
     try {
-        // This sends the data to your Google Sheet via the Apps Script
+        let receiptFile = null;
+        let customArtFile = null;
+
+        // Read the Receipt file if it exists
+        const receiptInput = document.getElementById('u-receipt');
+        if (receiptInput.files.length > 0) {
+            receiptFile = await toBase64(receiptInput.files[0]);
+        }
+
+        // Read the Custom Art file if it exists
+        const artInput = document.getElementById('k-image');
+        if (artInput.files.length > 0) {
+            customArtFile = await toBase64(artInput.files[0]);
+        }
+
+        const finalData = {
+            name: uName,
+            id: uId,
+            userClass: uClass,
+            total: "RM " + document.getElementById('total').innerText,
+            payment: selectedPay,
+            flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
+            flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
+            blindBox: document.getElementById('b-type').selectedOptions[0].text,
+            pipeline: document.getElementById('s-type').selectedOptions[0].text,
+            keychain: document.getElementById('k-type').selectedOptions[0].text,
+            receiptFile: receiptFile,  // This now contains the actual image data
+            customArtFile: customArtFile
+        };
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyOBO3uzbvLjOqQU_U185K8Qn2VKC-GkfcenTNPe5pdXzsn9S_VZPCsUSPSvzrAmOmt6A/exec';
+
         await fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors', // Essential for Google Apps Script redirects
+            mode: 'no-cors',
             cache: 'no-cache',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(finalData)
         });
 
         alert("Order submitted successfully!");
-        // Optional: Reset form or redirect to a thank you page
     } catch (error) {
-        console.error('Error!', error.message);
-        alert("There was an error submitting your order. Please try again.");
+        console.error(error);
+        alert("Error: " + error.message);
     } finally {
-        btn.innerText = "Place Pre-Order";
-        btn.disabled = false;
+      btn.innerText = "Place Pre-Order";
+      btn.disabled = false;
     }
 }
     </script>
