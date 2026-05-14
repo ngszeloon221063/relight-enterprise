@@ -176,13 +176,21 @@
 
             <!-- Blind Box -->
             <div class="nv-card p-8 space-y-6">
-                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
-                <select id="b-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                    <option value="0">Not Selected</option>
-                    <option value="12">C1: Box x1 (RM12)</option>
-                    <option value="20">C2: Box x2 (RM20)</option>
-                    <option value="35">C3: Box x3 + FREE WHISTLE (RM35)</option>
-                </select>
+                <div class="flex gap-4 items-end">
+                    <div class="flex-grow">
+                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
+                        <select id="b-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                            <option value="0">Not Selected</option>
+                            <option value="12">C1: Box x1 (RM12)</option>
+                            <option value="20">C2: Box x2 (RM20)</option>
+                            <option value="35">C3: Box x3 + FREE WHISTLE (RM35)</option>
+                        </select>
+                    </div>
+                    <div class="w-20">
+                        <label class="text-[8px] font-bold text-zinc-400 uppercase mb-1 block">Qty</label>
+                        <input type="number" id="k-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
+                    </div>
+                </div>
             </div>
 
             <!-- Pipeline Design -->
