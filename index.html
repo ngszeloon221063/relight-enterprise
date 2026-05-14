@@ -279,16 +279,19 @@
     </footer>
 
     <script>
-        // --- ADMINISTRATIVE CONTROL ---
-        const ALLOW_CASH_OPTION = false; // Toggle this true/false to enable/disable cash option
-        // ------------------------------
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw4DVUBTb2TmWkdcG_uZ55A8Aly3fPC0aJYu2_fNniKPKYYmMPYaWfe4bve4oi9006SHg/exec';
+    let selectedPay = 'TNG';
 
-        let selectedPay = 'TNG';
+    // Updated Payment logic to fetch from Google Sheets
+    window.addEventListener('DOMContentLoaded', async () => {
+        const payContainer = document.getElementById('payment-toggle-container');
+        payContainer.innerHTML = '<p class="px-6 py-3 text-zinc-500 text-xs animate-pulse">Syncing payment methods...</p>';
 
-        // Payment logic on load
-        window.addEventListener('DOMContentLoaded', () => {
-            const payContainer = document.getElementById('payment-toggle-container');
-            if (!ALLOW_CASH_OPTION) {
+        try {
+            const response = await fetch(scriptURL);
+            const settings = await response.json();
+            
+            if (!settings.allowCash) {
                 payContainer.innerHTML = '<button class="px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20">TNG eWallet Only</button>';
                 selectPayment('TNG');
             } else {
@@ -297,137 +300,140 @@
                     <button id="btn-cash" onclick="selectPayment('CASH')" class="px-10 py-3 rounded-full font-bold transition-all text-zinc-400">Cash</button>
                 `;
             }
-        });
+        } catch (e) {
+            // Fallback if sheet fails to load
+            payContainer.innerHTML = '<button class="px-10 py-3 rounded-full font-bold bg-blue-600 text-white">TNG eWallet Only</button>';
+        }
+    });
 
-        function selectPayment(method) {
-            selectedPay = method;
-            const tngUI = document.getElementById('tng-ui');
-            const btnTng = document.getElementById('btn-tng');
-            const btnCash = document.getElementById('btn-cash');
+    function selectPayment(method) {
+        selectedPay = method;
+        const tngUI = document.getElementById('tng-ui');
+        const btnTng = document.getElementById('btn-tng');
+        const btnCash = document.getElementById('btn-cash');
 
-            if (method === 'TNG') {
-                tngUI.classList.remove('hidden');
-                if (btnTng) {
-                    btnTng.className = "px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20";
-                    btnCash.className = "px-10 py-3 rounded-full font-bold transition-all text-zinc-400";
-                }
-            } else {
-                tngUI.classList.add('hidden');
+        if (method === 'TNG') {
+            tngUI.classList.remove('hidden');
+            if (btnTng) {
+                btnTng.className = "px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20";
+                btnCash.className = "px-10 py-3 rounded-full font-bold transition-all text-zinc-400";
+            }
+        } else {
+            tngUI.classList.add('hidden');
+            if (btnCash) {
                 btnCash.className = "px-10 py-3 rounded-full font-bold transition-all bg-zinc-800 text-white shadow-xl";
                 btnTng.className = "px-10 py-3 rounded-full font-bold transition-all text-zinc-400";
             }
         }
+    }
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark'); html.classList.add('light'); icon.innerText = '☀️';
-            } else {
-                html.classList.remove('light'); html.classList.add('dark'); icon.innerText = '🌙';
-            }
+    function toggleTheme() {
+        const html = document.documentElement;
+        const icon = document.getElementById('theme-icon');
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark'); html.classList.add('light'); icon.innerText = '☀️';
+        } else {
+            html.classList.remove('light'); html.classList.add('dark'); icon.innerText = '🌙';
         }
+    }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        function toggleFlowerForm() {
-            const extra = document.getElementById('flower-extra-ui');
-            extra.classList.toggle('hidden', document.getElementById('f-type').value == '0');
+    function toggleFlowerForm() {
+        const extra = document.getElementById('flower-extra-ui');
+        extra.classList.toggle('hidden', document.getElementById('f-type').value == '0');
+    }
+
+    function togglePipelineForm() {
+        const extra = document.getElementById('s-delivery-ui');
+        extra.classList.toggle('hidden', document.getElementById('s-type').value == '0');
+    }
+
+    function toggleKeychainForm() {
+        const val = document.getElementById('k-type').value;
+        const premadeUI = document.getElementById('k-premade-ui');
+        const customUI = document.getElementById('k-custom-ui');
+        premadeUI.classList.toggle('hidden', val != '6');
+        customUI.classList.toggle('hidden', val != '7');
+    }
+
+    function calc() {
+        const fBase = parseFloat(document.getElementById('f-type').value) || 0;
+        const bBase = parseFloat(document.getElementById('b-type').value) || 0;
+        const sBase = parseFloat(document.getElementById('s-type').value) || 0;
+        const kBase = parseFloat(document.getElementById('k-type').value) || 0;
+        const fQty = parseInt(document.getElementById('f-qty').value) || 1;
+        const bQty = parseInt(document.getElementById('b-qty').value) || 1;
+        const sQty = parseInt(document.getElementById('s-qty').value) || 1;
+        const kQty = parseInt(document.getElementById('k-qty').value) || 1;
+        const total = (fBase * fQty) + (bBase * bQty) + (sBase * sQty) + (kBase * kQty);
+        document.getElementById('total').innerText = total.toFixed(2);
+    }
+
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve({ base64: reader.result.split(',')[1], type: file.type, name: file.name });
+        reader.onerror = error => reject(error);
+    });
+
+    async function submitOrder() {
+        const btn = document.getElementById('sub-btn');
+        const uName = document.getElementById('u-name').value;
+        const uId = document.getElementById('u-id').value;
+        const uClass = document.getElementById('u-class').value;
+        const receiptInput = document.getElementById('u-receipt');
+        
+        if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
+        if(document.getElementById('total').innerText === "0.00") return alert("Please select an item.");
+        if(selectedPay === 'TNG' && receiptInput.files.length === 0) return alert("Please upload your TNG transaction receipt.");
+
+        btn.innerText = "Processing Order...";
+        btn.disabled = true;
+
+        try {
+            let receiptFileData = null;
+            if (selectedPay === 'TNG') receiptFileData = await toBase64(receiptInput.files[0]);
+
+            let customArtFileData = null;
+            const artInput = document.getElementById('k-image');
+            if (artInput.files.length > 0) customArtFileData = await toBase64(artInput.files[0]);
+
+            const finalData = {
+                name: uName,
+                id: uId,
+                userClass: uClass,
+                total: "RM " + document.getElementById('total').innerText,
+                payment: selectedPay,
+                flowerOrder: document.getElementById('f-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('f-qty').value})`,
+                flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) | Msg: ${document.getElementById('f-message').value} | From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
+                blindBox: document.getElementById('b-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('b-qty').value})`,
+                pipeline: document.getElementById('s-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('s-qty').value}) | Deliver To: ${document.getElementById('s-teacher-name').value || 'Self-Collect'}`,
+                keychain: `${document.getElementById('k-type').selectedOptions[0].text} (Qty: ${document.getElementById('k-qty').value}) | Name: ${document.getElementById('k-teacher-name').value || 'N/A'}`,
+                receiptFile: receiptFileData,
+                customArtFile: customArtFileData
+            };
+
+            await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors', 
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(finalData)
+            });
+
+            alert("Order placed! Thank you for choosing Relight.");
+            window.location.reload();
+
+        } catch (error) {
+            alert("Error: " + error.message);
+        } finally {
+            btn.innerText = "Place Pre-Order";
+            btn.disabled = false;
         }
-
-        function togglePipelineForm() {
-            const extra = document.getElementById('s-delivery-ui');
-            extra.classList.toggle('hidden', document.getElementById('s-type').value == '0');
-        }
-
-        function toggleKeychainForm() {
-            const val = document.getElementById('k-type').value;
-            const premadeUI = document.getElementById('k-premade-ui');
-            const customUI = document.getElementById('k-custom-ui');
-            premadeUI.classList.toggle('hidden', val != '6');
-            customUI.classList.toggle('hidden', val != '7');
-        }
-
-        function calc() {
-            const fBase = parseFloat(document.getElementById('f-type').value) || 0;
-            const bBase = parseFloat(document.getElementById('b-type').value) || 0;
-            const sBase = parseFloat(document.getElementById('s-type').value) || 0;
-            const kBase = parseFloat(document.getElementById('k-type').value) || 0;
-            const fQty = parseInt(document.getElementById('f-qty').value) || 1;
-            const bQty = parseInt(document.getElementById('b-qty').value) || 1;
-            const sQty = parseInt(document.getElementById('s-qty').value) || 1;
-            const kQty = parseInt(document.getElementById('k-qty').value) || 1;
-            const total = (fBase * fQty) + (bBase * bQty) + (sBase * sQty) + (kBase * kQty);
-            document.getElementById('total').innerText = total.toFixed(2);
-        }
-
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve({ base64: reader.result.split(',')[1], type: file.type, name: file.name });
-            reader.onerror = error => reject(error);
-        });
-
-        async function submitOrder() {
-            const btn = document.getElementById('sub-btn');
-            const uName = document.getElementById('u-name').value;
-            const uId = document.getElementById('u-id').value;
-            const uClass = document.getElementById('u-class').value;
-            const receiptInput = document.getElementById('u-receipt');
-            
-            if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
-            if(document.getElementById('total').innerText === "0.00") return alert("Please select an item.");
-            if(selectedPay === 'TNG' && receiptInput.files.length === 0) return alert("Please upload your TNG transaction receipt.");
-
-            btn.innerText = "Processing Order...";
-            btn.disabled = true;
-
-            try {
-                let receiptFileData = null;
-                if (selectedPay === 'TNG') receiptFileData = await toBase64(receiptInput.files[0]);
-
-                let customArtFileData = null;
-                const artInput = document.getElementById('k-image');
-                if (artInput.files.length > 0) customArtFileData = await toBase64(artInput.files[0]);
-
-                const finalData = {
-                    name: uName,
-                    id: uId,
-                    userClass: uClass,
-                    total: "RM " + document.getElementById('total').innerText,
-                    payment: selectedPay,
-                    flowerOrder: document.getElementById('f-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('f-qty').value})`,
-                    flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) | Msg: ${document.getElementById('f-message').value} | From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
-                    blindBox: document.getElementById('b-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('b-qty').value})`,
-                    pipeline: document.getElementById('s-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('s-qty').value}) | Deliver To: ${document.getElementById('s-teacher-name').value || 'Self-Collect'}`,
-                    keychain: `${document.getElementById('k-type').selectedOptions[0].text} (Qty: ${document.getElementById('k-qty').value}) | Name: ${document.getElementById('k-teacher-name').value || 'N/A'}`,
-                    receiptFile: receiptFileData,
-                    customArtFile: customArtFileData
-                };
-                
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbxybTEEyLLiosmeZajX5PHARbuJMM71WLpt6WlvPzvgjbtyiI0jFoa96LdZa37CIcS1hw/exec';
-
-                await fetch(scriptURL, {
-                    method: 'POST',
-                    mode: 'no-cors', 
-                    cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(finalData)
-                });
-
-                alert("Order placed! Thank you for choosing Relight.");
-                window.location.reload();
-
-            } catch (error) {
-                alert("Error: " + error.message);
-            } finally {
-                btn.innerText = "Place Pre-Order";
-                btn.disabled = false;
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
