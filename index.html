@@ -158,13 +158,21 @@
             <!-- Flower Section -->
             <div class="nv-card p-8 space-y-6">
                 <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Flower Variant</label>
-                <select id="f-type" onchange="calc(); toggleFlowerForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                    <option value="0">Not Selected</option>
-                    <option value="40">A1: 2 Rose + 3 Daisy (RM40)</option>
-                    <option value="24">A2: Rose x3 (RM24)</option>
-                    <option value="42">A3: Rose x5 (RM42)</option>
-                    <option value="39">A4: Daisy x5 (RM39)</option>
-                </select>
+                <div class="flex gap-4 items-end">
+                    <div class="flex-grow">
+                        <select id="f-type" onchange="calc(); toggleFlowerForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                            <option value="0">Not Selected</option>
+                            <option value="40">A1: 2 Rose + 3 Daisy (RM40)</option>
+                            <option value="24">A2: Rose x3 (RM24)</option>
+                            <option value="42">A3: Rose x5 (RM42)</option>
+                            <option value="39">A4: Daisy x5 (RM39)</option>
+                        </select>
+                    </div>
+                    <div class="w-20">
+                        <label class="text-[8px] font-bold text-zinc-400 uppercase mb-1 block">Qty</label>
+                        <input type="number" id="f-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
+                    </div>
+                </div>
                 
                 <div id="flower-extra-ui" class="hidden space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 animate__animated animate__fadeIn">
                     <input type="text" id="f-message" maxlength="30" placeholder="Message (30 characters max)" class="w-full bg-zinc-50 dark:bg-zinc-900 rounded-xl p-3 outline-none text-blue-500 font-medium border border-black/5">
@@ -173,12 +181,12 @@
                     <input type="text" id="f-sender" placeholder="Your Name (leave blank for anonymous)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
                 </div>
             </div>
-
+        
             <!-- Blind Box -->
             <div class="nv-card p-8 space-y-6">
+                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
                 <div class="flex gap-4 items-end">
                     <div class="flex-grow">
-                        <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
                         <select id="b-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
                             <option value="0">Not Selected</option>
                             <option value="12">C1: Box x1 (RM12)</option>
@@ -188,22 +196,30 @@
                     </div>
                     <div class="w-20">
                         <label class="text-[8px] font-bold text-zinc-400 uppercase mb-1 block">Qty</label>
-                        <input type="number" id="k-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
+                        <input type="number" id="b-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
                     </div>
                 </div>
             </div>
-
+        
             <!-- Pipeline Design -->
             <div class="nv-card p-8 space-y-6">
                 <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Pipeline Design</label>
-                <select id="s-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                    <option value="0">Not Selected</option>
-                    <option value="9">B1: Lily Design (RM9)</option>
-                    <option value="18">B1: (Special Offer) 3 Lilies Bundle (RM18)</option>
-                </select>
+                <div class="flex gap-4 items-end">
+                    <div class="flex-grow">
+                        <select id="s-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                            <option value="0">Not Selected</option>
+                            <option value="9">B1: Lily Design (RM9)</option>
+                            <option value="18">B1: (Special Offer) 3 Lilies Bundle (RM18)</option>
+                        </select>
+                    </div>
+                    <div class="w-20">
+                        <label class="text-[8px] font-bold text-zinc-400 uppercase mb-1 block">Qty</label>
+                        <input type="number" id="s-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
+                    </div>
+                </div>
             </div>
-
-            <!-- Keychain Section -->
+        
+            <!-- Keychain Section (Keep as is, but ensure IDs match) -->
             <div class="nv-card p-8 space-y-6">
                 <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Laser Keychain</label>
                 <div class="flex gap-4 items-end">
@@ -304,13 +320,22 @@
         }
 
         function calc() {
-            const f = parseFloat(document.getElementById('f-type').value) || 0;
-            const b = parseFloat(document.getElementById('b-type').value) || 0;
-            const s = parseFloat(document.getElementById('s-type').value) || 0;
+            // Prices
+            const fBase = parseFloat(document.getElementById('f-type').value) || 0;
+            const bBase = parseFloat(document.getElementById('b-type').value) || 0;
+            const sBase = parseFloat(document.getElementById('s-type').value) || 0;
             const kBase = parseFloat(document.getElementById('k-type').value) || 0;
+        
+            // Quantities
+            const fQty = parseInt(document.getElementById('f-qty').value) || 1;
+            const bQty = parseInt(document.getElementById('b-qty').value) || 1;
+            const sQty = parseInt(document.getElementById('s-qty').value) || 1;
             const kQty = parseInt(document.getElementById('k-qty').value) || 1;
-            const kTotal = kBase * kQty;
-            document.getElementById('total').innerText = (f + b + s + kTotal).toFixed(2);
+        
+            // Total Calculation
+            const total = (fBase * fQty) + (bBase * bQty) + (sBase * sQty) + (kBase * kQty);
+            
+            document.getElementById('total').innerText = total.toFixed(2);
         }
 
         function setPayment(m) {
