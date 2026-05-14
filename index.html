@@ -92,7 +92,7 @@
                 </div>
             </div>
             <div class="snap-center shrink-0 w-[320px] md:w-[400px] h-[500px] nv-card overflow-hidden group relative">
-                <img src="FLower.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <img src="Flower.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-10 flex flex-col justify-end">
                     <p class="text-blue-400 text-xs font-bold uppercase mb-2">Best Seller</p>
                     <h3 class="text-white text-2xl font-bold">Blooming Roses</h3>
@@ -101,10 +101,29 @@
             </div>
         </div>
 
+        <!-- Pipeline Showcase (Requested Item #3) -->
         <div class="mb-10 mt-20 reveal">
-            <h2 class="text-4xl font-bold tracking-tight">Precision Engineering. <span class="text-zinc-500">Laser & Pipeline.</span></h2>
+            <h2 class="text-4xl font-bold tracking-tight">The Pipeline Collection. <span class="text-zinc-500">Structural Crochet.</span></h2>
         </div>
-        <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+             <div class="nv-card overflow-hidden h-[400px] group relative">
+                <img src="Bluelily.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <h3 class="text-white text-3xl font-black italic tracking-widest uppercase">Blue Lily Series</h3>
+                </div>
+            </div>
+            <div class="nv-card overflow-hidden h-[400px] group relative">
+                <img src="Whitelily.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <h3 class="text-white text-3xl font-black italic tracking-widest uppercase">White Lily Series</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-10 mt-20 reveal">
+            <h2 class="text-4xl font-bold tracking-tight">Precision Engineering. <span class="text-zinc-500">Laser Works.</span></h2>
+        </div>
+        <div class="reveal grid grid-cols-1 md:grid-cols-1 gap-8">
             <div class="nv-card overflow-hidden h-[500px] flex flex-col group">
                 <div class="h-2/3 overflow-hidden">
                     <img src="Keychain.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
@@ -112,24 +131,6 @@
                 <div class="p-8 flex flex-col justify-center flex-grow text-center">
                     <h3 class="text-xl font-black uppercase">Laser Cut Designs</h3>
                     <p class="text-zinc-500 text-xs mt-2 uppercase tracking-widest font-bold">Industrial Precision</p>
-                </div>
-            </div>
-            <div class="nv-card overflow-hidden h-[500px] flex flex-col group">
-                <div class="h-2/3 overflow-hidden">
-                    <img src="Bluelily.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                </div>
-                <div class="p-8 flex flex-col justify-center flex-grow text-center">
-                    <h3 class="text-xl font-black uppercase">Pipeline: Blue Lily</h3>
-                    <p class="text-zinc-500 text-xs mt-2 uppercase tracking-widest font-bold">Hand-Woven Fiber</p>
-                </div>
-            </div>
-            <div class="nv-card overflow-hidden h-[500px] flex flex-col group">
-                <div class="h-2/3 overflow-hidden">
-                    <img src="Whitelily.jpeg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                </div>
-                <div class="p-8 flex flex-col justify-center flex-grow text-center">
-                    <h3 class="text-xl font-black uppercase">Pipeline: White Lily</h3>
-                    <p class="text-zinc-500 text-xs mt-2 uppercase tracking-widest font-bold">Artisan Structure</p>
                 </div>
             </div>
         </div>
@@ -181,7 +182,29 @@
                     <input type="text" id="f-sender" placeholder="Your Name (leave blank for anonymous)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none">
                 </div>
             </div>
-        
+
+            <!-- Pipeline Design (Updated Item #2) -->
+            <div class="nv-card p-8 space-y-6">
+                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Pipeline Design</label>
+                <div class="flex gap-4 items-end">
+                    <div class="flex-grow">
+                        <select id="s-type" onchange="calc(); togglePipelineForm()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
+                            <option value="0">Not Selected</option>
+                            <option value="9">B1: Lily Design (RM9)</option>
+                            <option value="18">B1: (Special Offer) 3 Lilies Bundle (RM18)</option>
+                        </select>
+                    </div>
+                    <div class="w-20">
+                        <label class="text-[8px] font-bold text-zinc-400 uppercase mb-1 block">Qty</label>
+                        <input type="number" id="s-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
+                    </div>
+                </div>
+                <!-- Requested Delivery field for Pipeline -->
+                <div id="s-delivery-ui" class="hidden pt-4 animate__animated animate__fadeIn">
+                    <input type="text" id="s-teacher-name" placeholder="Teacher to send to (leave blank if you collect yourself)" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none text-blue-500 font-medium">
+                </div>
+            </div>
+
             <!-- Blind Box -->
             <div class="nv-card p-8 space-y-6">
                 <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Kitkard Blind Box</label>
@@ -201,25 +224,7 @@
                 </div>
             </div>
         
-            <!-- Pipeline Design -->
-            <div class="nv-card p-8 space-y-6">
-                <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Pipeline Design</label>
-                <div class="flex gap-4 items-end">
-                    <div class="flex-grow">
-                        <select id="s-type" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none appearance-none">
-                            <option value="0">Not Selected</option>
-                            <option value="9">B1: Lily Design (RM9)</option>
-                            <option value="18">B1: (Special Offer) 3 Lilies Bundle (RM18)</option>
-                        </select>
-                    </div>
-                    <div class="w-20">
-                        <label class="text-[8px] font-bold text-zinc-400 uppercase mb-1 block">Qty</label>
-                        <input type="number" id="s-qty" value="1" min="1" onchange="calc()" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 text-xl font-bold outline-none">
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Keychain Section (Keep as is, but ensure IDs match) -->
+            <!-- Keychain Section -->
             <div class="nv-card p-8 space-y-6">
                 <label class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Laser Keychain</label>
                 <div class="flex gap-4 items-end">
@@ -237,12 +242,10 @@
                     </div>
                 </div>
                 
-                <!-- Premade Name Input -->
                 <div id="k-premade-ui" class="hidden pt-4 animate__animated animate__fadeIn">
                     <input type="text" id="k-teacher-name" placeholder="Teacher's Name for Engraving" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-2 outline-none text-blue-500 font-medium">
                 </div>
 
-                <!-- Custom Design Upload -->
                 <div id="k-custom-ui" class="hidden pt-4 animate__animated animate__fadeIn">
                     <p class="text-xs text-zinc-500 mb-2 font-bold uppercase">Upload Custom Artwork</p>
                     <input type="file" id="k-image" class="text-xs text-zinc-400">
@@ -262,9 +265,9 @@
                 <div class="text-8xl font-black tracking-tighter">RM <span id="total">0.00</span></div>
             </div>
 
+            <!-- Payment Toggle (Requested Item #1 - Cash closed) -->
             <div class="flex justify-center bg-zinc-100 dark:bg-zinc-900 p-2 rounded-full w-fit mx-auto mb-12 border border-black/5 dark:border-white/5">
-                <button id="pay-tng" onclick="setPayment('TNG')" class="px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20">TNG eWallet</button>
-                <button id="pay-cash" onclick="setPayment('Cash')" class="px-10 py-3 rounded-full font-bold transition-all text-zinc-500">Cash</button>
+                <button class="px-10 py-3 rounded-full font-bold transition-all bg-blue-600 text-white shadow-xl shadow-blue-500/20">TNG eWallet Only</button>
             </div>
 
             <div id="tng-ui" class="animate__animated animate__fadeIn">
@@ -286,6 +289,7 @@
     </footer>
 
     <script>
+        // Cash payment closed - Item #1
         let selectedPay = 'TNG';
 
         function toggleTheme() {
@@ -308,41 +312,32 @@
             extra.classList.toggle('hidden', document.getElementById('f-type').value == '0');
         }
 
+        function togglePipelineForm() {
+            const extra = document.getElementById('s-delivery-ui');
+            extra.classList.toggle('hidden', document.getElementById('s-type').value == '0');
+        }
+
         function toggleKeychainForm() {
             const val = document.getElementById('k-type').value;
             const premadeUI = document.getElementById('k-premade-ui');
             const customUI = document.getElementById('k-custom-ui');
-            
-            // Show Teacher Name for D1 (6) and D2 (6)
             premadeUI.classList.toggle('hidden', val != '6');
-            // Show Upload for D3 (7)
             customUI.classList.toggle('hidden', val != '7');
         }
 
         function calc() {
-            // Prices
             const fBase = parseFloat(document.getElementById('f-type').value) || 0;
             const bBase = parseFloat(document.getElementById('b-type').value) || 0;
             const sBase = parseFloat(document.getElementById('s-type').value) || 0;
             const kBase = parseFloat(document.getElementById('k-type').value) || 0;
         
-            // Quantities
             const fQty = parseInt(document.getElementById('f-qty').value) || 1;
             const bQty = parseInt(document.getElementById('b-qty').value) || 1;
             const sQty = parseInt(document.getElementById('s-qty').value) || 1;
             const kQty = parseInt(document.getElementById('k-qty').value) || 1;
         
-            // Total Calculation
             const total = (fBase * fQty) + (bBase * bQty) + (sBase * sQty) + (kBase * kQty);
-            
             document.getElementById('total').innerText = total.toFixed(2);
-        }
-
-        function setPayment(m) {
-            selectedPay = m;
-            document.getElementById('pay-tng').className = `px-10 py-3 rounded-full font-bold transition-all ${m==='TNG'?'bg-blue-600 text-white shadow-xl shadow-blue-500/20':'text-zinc-500'}`;
-            document.getElementById('pay-cash').className = `px-10 py-3 rounded-full font-bold transition-all ${m==='Cash'?'bg-blue-600 text-white shadow-xl shadow-blue-500/20':'text-zinc-500'}`;
-            document.getElementById('tng-ui').classList.toggle('hidden', m==='Cash');
         }
 
         const toBase64 = file => new Promise((resolve, reject) => {
@@ -361,21 +356,19 @@
             const uName = document.getElementById('u-name').value;
             const uId = document.getElementById('u-id').value;
             const uClass = document.getElementById('u-class').value;
+            const receiptInput = document.getElementById('u-receipt');
             
             if(!uName || !uId || !uClass) return alert("Please complete your identity information.");
             if(document.getElementById('total').innerText === "0.00") return alert("Please select an item.");
+            if(receiptInput.files.length === 0) return alert("Please upload your TNG transaction receipt.");
 
             btn.innerText = "Processing Order...";
             btn.disabled = true;
 
             try {
-                let receiptFileData = null;
+                let receiptFileData = await toBase64(receiptInput.files[0]);
                 let customArtFileData = null;
-
-                const receiptInput = document.getElementById('u-receipt');
                 const artInput = document.getElementById('k-image');
-
-                if (receiptInput.files.length > 0) receiptFileData = await toBase64(receiptInput.files[0]);
                 if (artInput.files.length > 0) customArtFileData = await toBase64(artInput.files[0]);
 
                 const finalData = {
@@ -383,11 +376,11 @@
                     id: uId,
                     userClass: uClass,
                     total: "RM " + document.getElementById('total').innerText,
-                    payment: selectedPay,
-                    flowerOrder: document.getElementById('f-type').selectedOptions[0].text,
+                    payment: "TNG eWallet",
+                    flowerOrder: document.getElementById('f-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('f-qty').value})`,
                     flowerRecipient: `To: ${document.getElementById('f-target-name').value} (${document.getElementById('f-target-class').value}) | Msg: ${document.getElementById('f-message').value} | From: ${document.getElementById('f-sender').value || 'Anonymous'}`,
-                    blindBox: document.getElementById('b-type').selectedOptions[0].text,
-                    pipeline: document.getElementById('s-type').selectedOptions[0].text,
+                    blindBox: document.getElementById('b-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('b-qty').value})`,
+                    pipeline: document.getElementById('s-type').selectedOptions[0].text + ` (Qty: ${document.getElementById('s-qty').value}) | Deliver To: ${document.getElementById('s-teacher-name').value || 'Self-Collect'}`,
                     keychain: `${document.getElementById('k-type').selectedOptions[0].text} (Qty: ${document.getElementById('k-qty').value}) | Name: ${document.getElementById('k-teacher-name').value || 'N/A'}`,
                     receiptFile: receiptFileData,
                     customArtFile: customArtFileData
